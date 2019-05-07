@@ -1,7 +1,9 @@
+import peeweedbevolve
 import os
 import config
 from flask import Flask
 from models.base_model import db
+from models.user import User
 
 web_dir = os.path.join(os.path.dirname(
     os.path.abspath(__file__)), 'instagram_web')
