@@ -1,3 +1,4 @@
+from flask_wtf.csrf import CSRFProtect
 import peeweedbevolve
 import os
 import config
@@ -14,6 +15,9 @@ if os.getenv('FLASK_ENV') == 'production':
     app.config.from_object("config.ProductionConfig")
 else:
     app.config.from_object("config.DevelopmentConfig")
+
+app.secret_key = os.getenv('SECRET_KEY')
+csrf = CSRFProtect(app)
 
 
 @app.before_request

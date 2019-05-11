@@ -3,7 +3,7 @@ import peewee as pw
 import datetime
 from flask import render_template, request, flash
 import re
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class User(BaseModel):
@@ -17,8 +17,9 @@ class User(BaseModel):
         if duplicate_email:
             self.errors.append('Email already used')
 
+        @classmethod
         def password_validate(password):
-            print(password)
+            # print(password)
             if (len(password) < 6) or (len(password) > 12):
                 return 'Password must be between 6 and 12 characters!'
             elif not re.search("[a-z]", password):
@@ -35,3 +36,18 @@ class User(BaseModel):
             self.password = generate_password_hash(self.password)
         else:
             self.errors.append(res)
+
+    def login_validate(self, current_password):
+        self.errors = []
+
+        password_to_check = current_password
+        hashed_password = self.password
+
+        res = check_password_hash(hashed_password, password_to_check)
+        print(res)
+
+        if res == True:
+            return True
+        else:
+            print("errors")
+            self.errors.append('Wrong password')

@@ -1,13 +1,14 @@
 {% extends "_layout.html" %}
 {% block title %}
-Sign Up
+Sign In
 {% endblock %}
 {% block header %}
 {% endblock %}
 {% block content %}
-<h1>Sign Up</h1>
+<h1>Sign In</h1>
 
-<form action="{{ url_for('users.user_create') }}" method='POST'>
+<form action="{{ url_for('users.user_show') }}" method='POST'>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     <div class="form-group">
         <label for="username">Username:</label>
         <input type='text' name='username' class="form-control" />
@@ -18,11 +19,6 @@ Sign Up
         <input type='password' name='password' class="form-control" />
     </div>
 
-    <div class="form-group">
-        <label for="email">Email:</label>
-        <input type='text' name='email' class="form-control" />
-    </div>
-
     {% for error in errors if errors | length > 0 %}
     <div class="alert alert-warning alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
@@ -31,6 +27,11 @@ Sign Up
     </div>
     {% endfor %}
 
-    <button type="submit" class="btn btn-primary">Create Account</button>
+    <button type="submit" class="btn btn-primary">Log In</button>
 </form>
+
+
+
+
+
 {% endblock %}
