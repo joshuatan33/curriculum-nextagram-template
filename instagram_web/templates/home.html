@@ -1,9 +1,17 @@
 {% extends "_layout.html" %}
 {% block title %}
-  Homepage
+Homepage
 {% endblock %}
 {% block header %}
 {% endblock %}
 {% block content %}
 <h1>Homepage</h1>
+{% if 'username' in session %}
+<p><a href="{{ url_for('users.show', username=session['username']) }}" class="btn">Userpage</a></p>
+<p><a href="{{ url_for('users.logout') }}" class="btn">Log Out</a></p>
+{% else %}
+<p><a href="{{ url_for('users.sign_up') }}" class="btn">Sign Up</a></p>
+<p><a href="{{ url_for('users.sign_in') }}" class="btn">Sign In</a></p>
+
+{% endif %}
 {% endblock %}
