@@ -7,7 +7,7 @@
 {% block content %}
 <h1>{{ username }}'s details update form</h1>
 
-<form action="{{ url_for('users.update', uid=uid) }}" method='POST'>
+<form action="{{ url_for('users.update', uid=current_user.id) }}" method='POST'>
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
     <div class="form-group">
         <label for="username">New Username:</label>
