@@ -6,8 +6,8 @@ Homepage
 {% endblock %}
 {% block content %}
 <h1>Homepage</h1>
-{% if 'username' in session %}
-<p><a href="{{ url_for('users.show', username=session['username']) }}" class="btn">Userpage</a></p>
+{% if current_user.is_authenticated %}
+<p><a href="{{ url_for('users.show', username=current_user.name) }}" class="btn">Userpage</a></p>
 <p><a href="{{ url_for('users.logout') }}" class="btn">Log Out</a></p>
 {% else %}
 <p><a href="{{ url_for('users.sign_up') }}" class="btn">Sign Up</a></p>
