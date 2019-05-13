@@ -96,7 +96,7 @@ def update(uid):
                 name=new_username
             ).where(User.id == uid)
         else:
-            if current_user.login_validate(new_password):
+            if current_user.password_validate(new_password):
                 current_person = User.update(
                     name=new_username,
                     password=generate_password_hash(new_password)
